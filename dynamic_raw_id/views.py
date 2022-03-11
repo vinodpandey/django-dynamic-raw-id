@@ -40,7 +40,7 @@ def label_view(
         return HttpResponseBadRequest(settings.DEBUG and msg or "")
 
     # Check 'view' or 'change' permission depending to Django's version
-    if VERSION[0] >= 2 and VERSION[1] >= 1:
+    if (VERSION[0] == 2 and VERSION[1] >= 1) or VERSION[0] > 2:
         if not request.user.has_perm("%s.view_%s" % (app_name, model_name)):
             return HttpResponseForbidden()
     else:
